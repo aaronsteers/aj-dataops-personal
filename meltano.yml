@@ -12,6 +12,7 @@ plugins:
     pip_url: git+https://github.com/adswerve/target-bigquery.git@0.11.3
   transformers:
   - name: dbt-bigquery
+    namespace: dbt_bigquery
     pip_url: dbt-core~=1.0.0 dbt-bigquery~=1.0.0
 environments:
 - name: dev
