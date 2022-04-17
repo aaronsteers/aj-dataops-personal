@@ -6,14 +6,32 @@ plugins:
   - name: tap-bigquery
     variant: anelendata
     pip_url: tap-bigquery
+  - name: tap-carbon-intensity
+    variant: meltano
+    pip_url: git+https://gitlab.com/meltano/tap-carbon-intensity.git
   loaders:
   - name: target-bigquery
     variant: adswerve
     pip_url: git+https://github.com/adswerve/target-bigquery.git@0.11.3
+    config:
+      add_metadata_columns: true
+      credentials_path: /Users/aj/Source/aj-dataops-personal/client_secrets.json
+      project_id: aj-dataops-personal
+  transforms:
+  - name: tap-carbon-intensity
+    variant: meltano
+    pip_url: https://gitlab.com/meltano/dbt-tap-carbon-intensity.git@config-version-2
   transformers:
   - name: dbt-bigquery
     namespace: dbt_bigquery
     pip_url: dbt-core~=1.0.0 dbt-bigquery~=1.0.0
+schedules:
+- name: test-carbon-intensity-to-bigquery
+  extractor: tap-carbon-intensity
+  loader: target-bigquery
+  transform: skip
+  interval: '@once'
+  start_date: 2022-04-17 20:31:19.009856
 environments:
 - name: dev
 - name: staging
