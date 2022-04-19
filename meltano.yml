@@ -9,6 +9,66 @@ plugins:
   - name: tap-carbon-intensity
     variant: meltano
     pip_url: git+https://gitlab.com/meltano/tap-carbon-intensity.git
+  - name: tap-spotify
+    namespace: tap_spotify
+    pip_url: git+https://github.com/Matatika/tap-spotify.git
+    executable: tap-spotify
+    capabilities:
+    - catalog
+    - discover
+    - state
+    settings:
+    - name: client_id
+      kind: password
+    - name: client_secret
+      kind: password
+    - name: refresh_token
+      kind: password
+  - name: tap-strava
+    namespace: tap_strava
+    pip_url: git+https://github.com/briansloane/tap-strava.git
+    executable: tap-strava
+    capabilities:
+    - catalog
+    - discover
+    - state
+    settings:
+    - name: start_date
+      kind: date_iso8601
+    - name: client_id
+      kind: password
+    - name: client_secret
+      kind: password
+    - name: access_token
+      kind: password
+    - name: refresh_token
+      kind: password
+    - name: code
+      kind: password
+      description: Authorization code for the specific athlete. https://developers.strava.com/docs/getting-started
+    config:
+      start_date: '2022-01-01'
+  - name: tap-openweathermap
+    namespace: tap_openweathermap
+    pip_url: git+https://github.com/Matatika/tap-openweathermap.git
+    executable: tap-openweathermap
+    capabilities:
+    - catalog
+    - discover
+    - state
+    settings:
+    - name: api_key
+      kind: password
+    - name: current_weather_city_name
+      kind: string
+    - name: forecast_weather_longitude
+      kind: string
+    - name: forecast_weather_lattitude
+      kind: string
+    config:
+      current_weather_city_name: Seattle
+      forecast_weather_lattitude: "122"  # "122.2870"
+      forecast_weather_longitude: "47"   # "47.5608"
   loaders:
   - name: target-bigquery
     variant: adswerve
@@ -32,6 +92,18 @@ schedules:
   transform: skip
   interval: '@once'
   start_date: 2022-04-17 20:31:19.009856
+- name: strava-to-bigquery
+  extractor: tap-strava
+  loader: target-bigquery
+  transform: skip
+  interval: '@once'
+  start_date: 2022-01-01 00:00:00
+- name: openweathermap-to-bigquery
+  extractor: tap-openweathermap
+  loader: target-bigquery
+  transform: skip
+  interval: '@once'
+  start_date: 2022-04-18 08:19:20.272061
 environments:
 - name: dev
 - name: staging
