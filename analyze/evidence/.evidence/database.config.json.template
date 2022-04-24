@@ -1,0 +1,5 @@
+{
+    "keyFilename": "./.evidence/bigquery-secrets.json",
+    "projectId": "<bigquery-project-id>",
+    "location": "US"
+}
