@@ -1,9 +1,17 @@
-# Welcome to Evidence
+# AJ's [Evidence](https://evidence.dev)-based BI Portal
 
-Edit this page at src/pages/index.md
+This site is a BI portal built on top of the [Meltano](https://meltano.com) DataOps OS and the Evidence.dev BI tool.
 
-Visit [docs.evidence.dev](https://docs.evidence.dev) to read the documentation.
+## Contributing guide
 
-- Have fun
-- Join our slack group
-- File issues on github
+Visit [docs.evidence.dev](https://docs.evidence.dev) to read the Evidence documentation.
+
+Within the project, you can edit this page at `analyze/evidence/src/pages/index.md`.
+
+## Building and Testing
+
+Locally in your project, you can build and refresh the report with the following command:
+
+`meltano invoke --containers evidence:dev`
+
+This command will spin up the server and will monitor the directory for file changes.

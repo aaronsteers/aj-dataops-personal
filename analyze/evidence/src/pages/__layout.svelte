@@ -21,7 +21,8 @@
 	<Nav
 		sections={[
 			{ href: '/', label: 'Home' },
-			{ href: '/firstquery', label: 'Querying Data' }
+			{ href: '/rickandmorty', label: 'Rick and Morty' },
+			{ href: '/google-trends', label: 'Google Trends' }
 		]}
 	/>
 </div>
