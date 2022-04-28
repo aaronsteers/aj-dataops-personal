@@ -125,11 +125,6 @@ plugins:
           command: init
           volumes:
           - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/
-      build:
-        args: ""
-        container_spec:
-          image: evidence
-          command: build
       dev:
         args: ""
         container_spec:
@@ -139,6 +134,12 @@ plugins:
             '3000': '3000'
           volumes:
           - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/
+      build:
+        # Not working yet
+        args: ""
+        container_spec:
+          image: evidence
+          command: build
 schedules:
 - name: test-carbon-intensity-to-bigquery
   extractor: tap-carbon-intensity
