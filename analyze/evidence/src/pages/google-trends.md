@@ -1,6 +1,6 @@
 # Google Trends
 
-This page is filled with fun facts from the **Google Trends**. Data is sourced from the BigQuery Sample Data Project titled `google_trends`.
+This page is filled with fun facts from the **Google Trends**. Data is sourced from the BigQuery Public Dataset titled [Google Trends](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends?project=meltano-testing-and-training).
 
 ```google_trends_query
 

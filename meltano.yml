@@ -67,8 +67,8 @@ plugins:
       kind: string
     config:
       current_weather_city_name: Seattle
-      forecast_weather_lattitude: "122"  # "122.2870"
-      forecast_weather_longitude: "47"   # "47.5608"
+      forecast_weather_lattitude: '122'
+      forecast_weather_longitude: '47'
   - name: tap-rickandmorty
     namespace: tap_rickandmorty
     pip_url: git+https://github.com/aaronsteers/tap-rickandmorty.git
@@ -100,6 +100,9 @@ plugins:
       add_metadata_columns: true
       credentials_path: /Users/aj/Source/aj-dataops-personal/client_secrets.json
       project_id: aj-dataops-personal
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
   transforms:
   - name: tap-carbon-intensity
     variant: meltano
@@ -111,35 +114,31 @@ plugins:
   utilities:
   - name: evidence
     namespace: evidence
-    # executable: docker
     commands:
       build_image:
-        executable: docker
         args: build -t=evidence /Users/aj/Source/evidence
+        executable: docker
       init:
         args: ""
         container_spec:
           image: evidence
           command: init
           volumes:
-            - "$MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/"
+          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/
       build:
         args: ""
         container_spec:
           image: evidence
           command: build
       dev:
-        executable: docker
         args: ""
-        # args: run -p=3000:3000 -v=$(pwd)/evidence:/evidence/project -w=/evidence/project -it --rm evidence
         container_spec:
           image: evidence
           command: dev
-          volumes:
-            - "$MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/"
           ports:
-            "3000": "3000"
-
+            '3000': '3000'
+          volumes:
+          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/
 schedules:
 - name: test-carbon-intensity-to-bigquery
   extractor: tap-carbon-intensity
