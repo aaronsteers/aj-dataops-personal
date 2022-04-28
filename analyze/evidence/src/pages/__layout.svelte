@@ -22,7 +22,8 @@
 		sections={[
 			{ href: '/', label: 'Home' },
 			{ href: '/rickandmorty', label: 'Rick and Morty' },
-			{ href: '/google-trends', label: 'Google Trends' }
+			{ href: '/google-trends', label: 'Google Trends' },
+			{ href: '/pypi', label: 'PyPi Stats' }
 		]}
 	/>
 </div>
