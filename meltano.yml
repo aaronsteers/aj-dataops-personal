@@ -116,7 +116,12 @@ plugins:
     namespace: evidence
     commands:
       build_image:
+        # identical to running `docker build -t=evidence .` from the evidence project dir
         args: build -t=evidence /Users/aj/Source/evidence
+        executable: docker
+      pull_image:
+        # identical to running `docker pull evidence`
+        args: pull evidence
         executable: docker
       init:
         args: ""
