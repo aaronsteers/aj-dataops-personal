@@ -1,6 +1,14 @@
 version: 1
 default_environment: dev
 project_id: 88fd1a48-b28c-4bc4-80b2-3751e2915aff
+jobs:
+  build:
+  - - tap-rickandmorty target-bigquery
+    - tap-strava target-bigquery
+    - tap-spotify target-bigquery
+  - dbt-bigquery:run
+  - dbt-bigquery:test
+  - evidence:build
 plugins:
   extractors:
   - name: tap-bigquery
