@@ -22,7 +22,6 @@ LIMIT 1000
 ## Top Search Results in Seattle Region
 
 {#each data.google_trends_query as google_trends}
-
-- #{google_trends.rank}: {google_trends.term}
+- #{google_trends.rank}: [{google_trends.term}](https://google.com/search?q={google_trends.term})
 
 {/each}
