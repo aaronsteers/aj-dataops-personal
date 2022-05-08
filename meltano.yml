@@ -123,25 +123,21 @@ plugins:
   - name: evidence
     namespace: evidence
     commands:
-      build_image:
-        # identical to running `docker build -t=evidence .` from the evidence project dir
-        args: build -t=evidence /Users/aj/Source/evidence
-        executable: docker
       pull_image:
-        # identical to running `docker pull evidence`
-        args: pull evidence
+        # https://github.com/evidence-dev/docker-devenv
+        args: pull evidencedev/devenv:latest
         executable: docker
       init:
         args: ""
         container_spec:
-          image: evidence
+          image: evidencedev/devenv:latest
           command: init
           volumes:
           - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/
       dev:
         args: ""
         container_spec:
-          image: evidence
+          image: evidencedev/devenv:latest
           command: dev
           ports:
             '3000': '3000'
@@ -151,7 +147,7 @@ plugins:
         # Not working yet
         args: ""
         container_spec:
-          image: evidence
+          image: evidencedev/devenv:latest
           command: build
 schedules:
 - name: test-carbon-intensity-to-bigquery
