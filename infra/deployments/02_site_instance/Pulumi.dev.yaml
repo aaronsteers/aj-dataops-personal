@@ -1,0 +1,4 @@
+config:
+  aws:region: us-west-2
+  meltano-site-instance:deployment_name: ajtest-DELETE02
+  meltano-site-instance:target_eks_cluster: ajtest-DELETE-default-cluster-77a29b7

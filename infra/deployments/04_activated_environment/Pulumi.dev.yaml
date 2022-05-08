@@ -1,0 +1,26 @@
+config:
+  aws:region: us-west-2
+  meltano-hosted-project:deployment_name: ajtest-DELETE03
+  meltano-hosted-project:target_eks_cluster: ajtest-DELETE-default-cluster-77a29b7
+  meltano-hosted-project:project_config:
+    branch_environment_map:
+      main: prod
+      develop: beta
+    devtest_environment_name: userdev
+    ci_environment_name: cicd
+    environment_config:
+      prod:
+        services_enabled: True
+        schedules_enabled: True
+        build_steps:
+        - run: build
+      beta:
+        services_enabled: True
+        schedules_enabled: True
+        build_steps:
+        - run: build
+      cicd:
+        services_enabled: False
+        schedules_enabled: False
+        build_steps:
+        - run: build_without_el
