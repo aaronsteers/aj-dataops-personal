@@ -1,24 +1,17 @@
 {
-  "name": "@evidence-dev/components",
-  "version": "0.1.21",
+  "name": "my-evidence-project",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev --host 0.0.0.0",
-    "build": "svelte-kit build",
-    "preview": "svelte-kit preview",
-    "package": "svelte-kit package && pnpm clean-package",
-    "clean-package": "node scripts/clean-package.js",
-    "prepublishOnly": "pnpm package"
+    "build": "evidence build",
+    "dev": "evidence dev",
+    "test": "evidence build"
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
   },
   "type": "module",
   "dependencies": {
-    "@tidyjs/tidy": "2.4.4",
-    "echarts": "5.2.2",
-    "echarts-stat": "1.2.0"
-  },
-  "publishConfig": {
-    "directory": "../../packages/components"
-  },
-  "devDependencies": {
-    "fs-extra": "^10.0.1"
+    "@evidence-dev/evidence": "^1.0.1"
   }
 }
