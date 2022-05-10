@@ -1,0 +1,6 @@
+name: meltano-aws
+runtime:
+  name: python
+  options:
+    virtualenv: /Users/aj/Library/Caches/pypoetry/virtualenvs/poe-UJy2mlGs-py3.8
+description: Deploys Meltano to AWS

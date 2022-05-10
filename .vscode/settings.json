@@ -3,5 +3,10 @@
         "activityBar.background": "#60071A",
         "titleBar.activeBackground": "#860925",
         "titleBar.activeForeground": "#FFFBFC"
-    }
+    },
+    "python.testing.pytestArgs": [
+        "infra/pulumi-meltano-lib"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

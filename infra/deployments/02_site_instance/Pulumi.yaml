@@ -1,0 +1,9 @@
+name: meltano-site-instance
+runtime:
+  name: python
+  options:
+    virtualenv: /Users/aj/Library/Caches/pypoetry/virtualenvs/poe-UJy2mlGs-py3.8
+description: |
+  Deploys a site instance to Meltano service fabric. A site instance can contain multiple projects
+  from the same customer organization. Site instances cannot access resources from other site
+  instances.
