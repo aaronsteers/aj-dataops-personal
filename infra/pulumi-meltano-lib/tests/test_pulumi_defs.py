@@ -7,15 +7,11 @@ from pulumi_meltano.mocks import set_mocks
 mock_settings = {"project:deployment_name": "mock"}
 set_mocks(mock_settings)
 
+from pulumi_meltano.meltano_environments import new_activated_environment  # noqa: E402
+from pulumi_meltano.projects import MeltanoProjectDefinition  # noqa: E402
+from pulumi_meltano.projects import new_hosted_project  # noqa: E402
 from pulumi_meltano.service_fabric import new_service_fabric  # noqa: E402
 from pulumi_meltano.site_instances import new_site_instance  # noqa: E402
-from pulumi_meltano.projects import (
-    new_hosted_project,
-    MeltanoProjectDefinition,
-)  # noqa: E402
-from pulumi_meltano.meltano_environments import new_activated_environment  # noqa: E402
-
-import pulumi
 
 
 def test_service_fabric():
