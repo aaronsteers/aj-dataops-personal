@@ -127,28 +127,53 @@ plugins:
         # https://github.com/evidence-dev/docker-devenv
         args: pull evidencedev/devenv:latest
         executable: docker
+      help:
+        args: ""
+        container_spec:
+          image: evidencedev/devenv:latest
+          command: --help
+          volumes:
+          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence-workspace/
       init:
         args: ""
         container_spec:
           image: evidencedev/devenv:latest
           command: init
           volumes:
-          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/
+          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence-workspace/
       dev:
         args: ""
         container_spec:
           image: evidencedev/devenv:latest
-          command: dev
           ports:
             '3000': '3000'
           volumes:
-          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence/project/
+          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence-workspace/
+      install:
+        args: "install"
+        container_spec:
+          image: evidencedev/devenv:latest
+          command: npm install
+          volumes:
+          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence-workspace/
       build:
         # Not working yet
         args: ""
         container_spec:
           image: evidencedev/devenv:latest
-          command: build
+          command: npm run build
+          volumes:
+          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence-workspace/
+      bash:
+        # Doesn't seem to work yet, missing interactive mode flag (-i).
+        # Instead run:
+        # > docker run -it --rm -v $(pwd)/:/evidence-workspace/ evidencedev/devenv:latest bash
+        args: ""
+        container_spec:
+          image: evidencedev/devenv:latest
+          command: bash
+          volumes:
+          - $MELTANO_PROJECT_ROOT/analyze/evidence/:/evidence-workspace/
 schedules:
 - name: test-carbon-intensity-to-bigquery
   extractor: tap-carbon-intensity
