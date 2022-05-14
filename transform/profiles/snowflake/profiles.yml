@@ -1,41 +1,39 @@
-# Snowflake config reference: https://docs.getdbt.com/reference/warehouse-profiles/snowflake-profile
-#
-# Warning: Do not store credentials in this file unless you've take the necessary steps to remove
-# this file from your git commit.
 config:
   send_anonymous_usage_stats: False
   use_colors: True
 meltano:
-  target: "{{ env_var('MELTANO_ENVIRONMENT', 'dev') }}"  # The default profile name if no other profile is selected.
+  target: "{{ env_var('MELTANO_ENVIRONMENT', 'dev') }}"
   outputs:
-    # TODO: Optionally, revise or add to these profiles to reflect your own environments. Meltano adds dev, staging and prod by default.
     dev:
-      type: snowflake
+      type: bigquery
+      method: "{{ env_var('DBT_BIGQUERY_METHOD') }}"
+      project: "{{ env_var('DBT_BIGQUERY_PROJECT') }}"
+      dataset: "{{ env_var('DBT_BIGQUERY_DATASET') }}"
       threads: 2
-      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
-      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
-      password: "{{ env_var('DBT_SNOWFLAKE_PASSWORD') }}"
-      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
-      warehouse: "{{ env_var('DBT_SNOWFLAKE_WAREHOUSE') }}"
-      database: "{{ env_var('DBT_SNOWFLAKE_DATABASE') }}"
-      schema: "{{ env_var('DBT_SNOWFLAKE_SCHEMA') }}"
+      refresh_token: "{{ env_var('DBT_BIGQUERY_REFRESH_TOKEN') }}"
+      client_id: "{{ env_var('DBT_BIGQUERY_CLIENT_ID') }}"
+      client_secret: "{{ env_var('DBT_BIGQUERY_CLIENT_SECRET') }}"
+      token_uri: "{{ env_var('DBT_BIGQUERY_TOKEN_URI') }}"
+      keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE') }}"
     staging:
-      type: snowflake
+      type: bigquery
+      method: "{{ env_var('DBT_BIGQUERY_METHOD') }}"
+      project: "{{ env_var('DBT_BIGQUERY_PROJECT') }}"
+      dataset: "{{ env_var('DBT_BIGQUERY_DATASET') }}"
       threads: 4
-      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
-      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
-      password: "{{ env_var('DBT_SNOWFLAKE_PASSWORD') }}"
-      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
-      warehouse: "{{ env_var('DBT_SNOWFLAKE_WAREHOUSE') }}"
-      database: "{{ env_var('DBT_SNOWFLAKE_DATABASE') }}"
-      schema: "{{ env_var('DBT_SNOWFLAKE_SCHEMA') }}"
+      refresh_token: "{{ env_var('DBT_BIGQUERY_REFRESH_TOKEN') }}"
+      client_id: "{{ env_var('DBT_BIGQUERY_CLIENT_ID') }}"
+      client_secret: "{{ env_var('DBT_BIGQUERY_CLIENT_SECRET') }}"
+      token_uri: "{{ env_var('DBT_BIGQUERY_TOKEN_URI') }}"
+      keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE') }}"
     prod:
-      type: snowflake
+      type: bigquery
+      method: "{{ env_var('DBT_BIGQUERY_METHOD') }}"
+      project: "{{ env_var('DBT_BIGQUERY_PROJECT') }}"
+      dataset: "{{ env_var('DBT_BIGQUERY_DATASET') }}"
       threads: 6
-      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
-      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
-      password: "{{ env_var('DBT_SNOWFLAKE_PASSWORD') }}"
-      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
-      warehouse: "{{ env_var('DBT_SNOWFLAKE_WAREHOUSE') }}"
-      database: "{{ env_var('DBT_SNOWFLAKE_DATABASE') }}"
-      schema: "{{ env_var('DBT_SNOWFLAKE_SCHEMA') }}"
+      refresh_token: "{{ env_var('DBT_BIGQUERY_REFRESH_TOKEN') }}"
+      client_id: "{{ env_var('DBT_BIGQUERY_CLIENT_ID') }}"
+      client_secret: "{{ env_var('DBT_BIGQUERY_CLIENT_SECRET') }}"
+      token_uri: "{{ env_var('DBT_BIGQUERY_TOKEN_URI') }}"
+      keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE') }}"
