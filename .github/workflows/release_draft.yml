@@ -21,6 +21,9 @@ jobs:
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       ORG_LEVEL_TOKEN: ${{secrets.ORG_LEVEL_TOKEN}}
+    permissions:
+      contents: write  # for release-drafter/release-drafter to create a github release
+      pull-requests: write  # for release-drafter/release-drafter to add label to PR
 
     steps:
     - uses: actions/checkout@v2
@@ -51,3 +54,12 @@ jobs:
     - name: Create Pull Requests
       run: |
         echo "Creating Pull Request. (Dummy.)"
+
+    - name: Create release draft
+      uses: release-drafter/release-drafter@v5
+      # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+      # with:
+      #   config-name: my-config.yml
+      #   disable-autolabeler: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
