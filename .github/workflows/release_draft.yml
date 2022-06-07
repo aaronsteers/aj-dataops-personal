@@ -29,7 +29,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Validation version input
-      if: ${{ github.event.inputs.force != 'true' }} 
+      if: ${{ github.event.inputs.force != 'true' }}
       run: |
         echo "Validation failed. (Dummy.)"
         exit 1
@@ -65,7 +65,7 @@ jobs:
         commit-message: version bump (auto)
         title: Release ${{ github.event.inputs.version }}
         body: Update changelog to reflect release changes
-        branch: release/${{ github.event.inputs.version }} 
+        branch: release/${{ github.event.inputs.version }}
         base: main
 
     - name: Create release draft
@@ -73,4 +73,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        version: ${{ github.event.inputs.version }} 
+        version: ${{ github.event.inputs.version }}
+        commitish: release/${{ github.event.inputs.version }}
