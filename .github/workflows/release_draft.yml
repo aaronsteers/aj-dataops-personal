@@ -1,0 +1,53 @@
+name: Release drafts
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_num:
+        description: "Version Number"
+        type: string
+        required: true
+        default: vX.Y.Z
+      force:
+        description: "Force Push (ignore validation)"
+        type: boolean
+        required: true
+        default: false
+
+jobs:
+  draft_release:
+
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      ORG_LEVEL_TOKEN: ${{secrets.ORG_LEVEL_TOKEN}}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Validation version input
+      if: ${{ github.event.inputs.force != 'true' }} 
+      run: |
+        echo "Validation failed. (Dummy.)"
+        exit 1
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        # Version of Poetry to use
+        version: 1.1.13
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+
+    - name: Bump version
+      run: |
+        echo "Bumping version. (Dummy.)"
+
+    - name: Create Pull Requests
+      run: |
+        echo "Creating Pull Request. (Dummy.)"
