@@ -55,6 +55,19 @@ jobs:
       run: |
         echo "Creating Pull Request. (Dummy.)"
 
+    - name: Bump version
+      run: |
+        echo "${{ github.event.inputs.version }}" > ./VERSION
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: version bump (auto)
+        title: Release ${{ github.event.inputs.version }}
+        body: Update changelog to reflect release changes
+        branch: release/${{ github.event.inputs.version }} 
+        base: main
+
     - name: Create release draft
       uses: release-drafter/release-drafter@v5
       env:
