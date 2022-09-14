@@ -29,7 +29,7 @@ class MyPulumiMocks(pulumi.runtime.Mocks):
     """From https://www.pulumi.com/docs/guides/testing/unit/"""
 
     def new_resource(self, args: pulumi.runtime.MockResourceArgs):
-        return [args.name + "_id", args.inputs]
+        return [f"{args.name}_id", args.inputs]
 
     def call(self, args: pulumi.runtime.MockCallArgs):
         return {}
@@ -40,9 +40,7 @@ def mock_pulumi_settings(settings: Dict) -> None:
 
     https://github.com/pulumi/pulumi/issues/4472#issuecomment-1015818376
     """
-    pulumi_settings: Dict[str, str] = {}
-    for k, v in settings.items():
-        pulumi_settings[k] = v
+    pulumi_settings: Dict[str, str] = dict(settings.items())
     pulumi_settings_str = json.dumps(pulumi_settings)
     environ["PULUMI_CONFIG"] = pulumi_settings_str
 

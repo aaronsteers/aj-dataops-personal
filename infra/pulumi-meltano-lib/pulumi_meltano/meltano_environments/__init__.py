@@ -52,7 +52,7 @@ def new_activated_environment(
     """
     project_image = "meltano/meltano"  # TODO
 
-    environment_pod = k8.core.v1.Pod(
+    return k8.core.v1.Pod(
         "nginxPod",
         spec=k8.core.v1.PodSpecArgs(
             containers=[
@@ -68,4 +68,3 @@ def new_activated_environment(
             ],
         ),
     )
-    return environment_pod

@@ -95,13 +95,9 @@ def new_subnets(
     """
     subnets: List[aws.ec2.Subnet] = []
     obj_tags = tags(deployment)
+    cidr_block = "10.0.1.0/24"
     for n in range(1, count):
-        if count == 1:
-            subnet_name = name("subnet")
-        else:
-            subnet_name = name(f"subnet{n}")
-
-        cidr_block = "10.0.1.0/24"
+        subnet_name = name("subnet") if count == 1 else name(f"subnet{n}")
         subnets.append(
             aws.ec2.Subnet(
                 subnet_name,
