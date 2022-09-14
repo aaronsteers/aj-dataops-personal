@@ -13,8 +13,12 @@ def new_service_fabric():
     created: List[Any] = []
 
     ecr_container, ecr_image = containers.new_hosted_container_image()
-    created.append([ecr_container, ecr_image])
-    created.append(list(containers.new_ecs(container_image=ecr_image)))
+    created.extend(
+        (
+            [ecr_container, ecr_image],
+            list(containers.new_ecs(container_image=ecr_image)),
+        )
+    )
 
     vpc = pulumi_meltano.components.network.new_network(
         num_public_subnets=2,
@@ -24,8 +28,9 @@ def new_service_fabric():
 
     # Deploy a small canary service (NGINX), to test that the cluster is working.
     eks_cluster = pulumi_meltano.components.eks.new_eks_cluster(
-        vpc.public_subnet_ids[0:2]
+        vpc.public_subnet_ids[:2]
     )
+
 
     created += [vpc, eks_cluster]
 

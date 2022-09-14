@@ -30,10 +30,7 @@ def name(
                 result = candidate
         return result
 
-    if lower:
-        return result.lower()
-
-    return result
+    return result.lower() if lower else result
 
 
 def tags(deployment: str = None) -> Dict[str, str]:

@@ -49,10 +49,9 @@ def _new_eks_iam():
 def new_eks_cluster(subnet_ids: List[str]) -> eks.Cluster:
     vpc_config_args = eks.ClusterVpcConfigArgs(subnet_ids=subnet_ids)
     eks_role, _, _ = _new_eks_iam()
-    eks_cluster = eks.Cluster(
+    return eks.Cluster(
         name("eks"), role_arn=eks_role.arn, vpc_config=vpc_config_args
     )
-    return eks_cluster
 
 
 def new_eks_deployment(eks_cluster: Any, app_name: str, image: str):
