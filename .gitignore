@@ -1,5 +1,7 @@
 *client_secrets.json
 
 /venv
-/.meltano
 .env
+.venv
+.venv-*
+.cache
