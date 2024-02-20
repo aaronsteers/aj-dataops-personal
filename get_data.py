@@ -8,9 +8,8 @@ import airbyte as ab
 
 
 ENV_GITHUB_PERSONAL_ACCESS_TOKEN = "GITHUB_PERSONAL_ACCESS_TOKEN"
-CACHE_NAME = "my_data"
 GITHUB_CONFIG = {
-    "start_date": "2024-01-01T00:00:00Z",
+    # https://docs.airbyte.com/integrations/sources/github#reference
     "repositories": [
         "airbytehq/quickstarts",
     ],
@@ -20,16 +19,15 @@ GITHUB_CONFIG = {
 }
 
 
-
 def main():
     """Main function."""
     print("Getting data from GitHub...")
-    source_github = ab.get_source("source-github")
-    source_github.set_config(GITHUB_CONFIG)
-    source_github.select_streams(["pull_requests", "issues"])
-    cache = ab.new_local_cache(CACHE_NAME)
-    read_result = source_github.read(cache=cache)
-    print("Finished getting data from GitHub.")
+    read_result = ab.get_source(
+        "source-github",
+        config=GITHUB_CONFIG,
+        streams=["pull_requests", "issues"],
+    ).read()
+    print(f"Finished reading GitHub data into '{read_result.cache.config.db_path}'.")
     for stream in read_result.streams.values():
         tbl = stream.to_sql_table()
         print(
